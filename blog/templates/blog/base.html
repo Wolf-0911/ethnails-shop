@@ -1,3 +1,4 @@
+{% load blog_tags %}
 {% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +17,18 @@
     <div>
         <h2>My blog</h2>]
         <p>This is my blog.</p>
+        I've written {% total_posts %} posts so far.
+        <h3>Latest posts</h3>
+        {% show_latest_posts 2 %}
+        <h3>Most commented posts</h3>
+        {% most_commented_posts as most_comments %}
+        <ul>
+            {% for post in most_comments %}
+            <li>
+                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
 </body>
 </html>
